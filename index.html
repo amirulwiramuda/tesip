@@ -1,146 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP2BIN</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP calculateor</title>
+  </head>
+  <body>
     <label>IP address :</label>
-    <input id="ip" type="text" placeholder="192.168.1.1"> <br> <br>
+    <input id="ip" type="text" placeholder="192.168.1.1" /> <br />
+    <br />
+    <label>Mask/CIDR :</label>
+    <input id="mask" type="text" placeholder="24" /> <br />
+    <br />
     <label>IP Binary :</label>
-    <p id="res"></p>
-    <br>
+    <p id="ipbin"></p>
+    <label>Subnet Mask :</label>
+    <p id="submask"></p>
+    <label>Subnet Bin :</label>
+    <p id="subbin"></p>
+    <label>Total Host :</label>
+    <p id="th"></p>
+    <label>Usable Host :</label>
+    <p id="uh"></p>
+    <br />
     <button onclick="dec2bin()" id="con">Convert</button>
     <button onclick="reset()" id="set">Reset</button>
 
-    <script>      
-
-        function dec2bin() {
-
-        var add = document.getElementById('ip').value
-        var addarr = add.split(".")
+    <script>
+      function dec2bin() {
+          //ip address to binary
+        var add = document.getElementById("ip").value;
+        var addarr = add.split(".");
 
         for (let g = 0; g <= addarr.length; g++) {
-        if (addarr[g] === "") {
-            alert(add+" is Invalid IP Address")
-            addarr = false
-            }
+          if (addarr[g] === "") {
+            alert(add + " is Invalid IP Address");
+            addarr = false;
+          }
         }
 
-        if (addarr.length > 4){
-            alert(add+" is Invalid IP Address")
-            addarr = false
+        if (addarr.length > 4) {
+          alert(add + " is Invalid IP Address");
+          addarr = false;
         }
 
-        for (var a = addarr.length; a>=0; a--) {
-        add1 = addarr[a]
-        add2 = addarr[a+1]
-        add3 = addarr[a+2]
-        add4 = addarr[a+3]
+        for (var a = addarr.length; a >= 0; a--) {
+          add1 = addarr[a];
+          add2 = addarr[a + 1];
+          add3 = addarr[a + 2];
+          add4 = addarr[a + 3];
         }
 
-        var add1n = Number(add1)
-        var add2n = Number(add2)
-        var add3n = Number(add3)
-        var add4n = Number(add4)
-        
-        if (isNaN(add1n)){
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
-        }else if (isNaN(add2n)){
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
-        }else if (isNaN(add3n)){
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
-        }else if (isNaN(add4n)){
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
+        var add1n = Number(add1);
+        var add2n = Number(add2);
+        var add3n = Number(add3);
+        var add4n = Number(add4);
+
+        if (isNaN(add1n)) {
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
+        } else if (isNaN(add2n)) {
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
+        } else if (isNaN(add3n)) {
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
+        } else if (isNaN(add4n)) {
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
         }
 
         if (add1n > 255) {
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
         } else if (add2n > 255) {
-            alert(add+" is Invalid IP Address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
+          alert(add + " is Invalid IP Address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
         } else if (add3n > 255) {
-            alert(add+" is Invalid IP address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
+          alert(add + " is Invalid IP address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
         } else if (add4n > 255) {
-            alert(add+" is Invalid IP address")
-            add1n = 0
-            add2n = 0
-            add3n = 0
-            add4n = 0
+          alert(add + " is Invalid IP address");
+          add1n = 0;
+          add2n = 0;
+          add3n = 0;
+          add4n = 0;
         }
+
+        var add1bin = add1n.toString(2).split("");
+        var add2bin = add2n.toString(2).split("");
+        var add3bin = add3n.toString(2).split("");
+        var add4bin = add4n.toString(2).split("");
+        var oktet1 = 8 - add1bin.length;
+        var oktet2 = 8 - add2bin.length;
+        var oktet3 = 8 - add3bin.length;
+        var oktet4 = 8 - add4bin.length;
+
+        if (add1bin.length < 8) {
+          for (var b = 0; b < oktet1; b++) {
+            add1bin.unshift("0");
+          }
+        }
+        if (add2bin.length < 8) {
+          for (var c = 0; c < oktet2; c++) {
+            add2bin.unshift("0");
+          }
+        }
+        if (add3bin.length < 8) {
+          for (var d = 0; d < oktet3; d++) {
+            add3bin.unshift("0");
+          }
+        }
+        if (add4bin.length < 8) {
+          for (var f = 0; f < oktet4; f++) {
+            add4bin.unshift("0");
+          }
+        }
+        var add1fin = add1bin.join("");
+        var add2fin = add2bin.join("");
+        var add3fin = add3bin.join("");
+        var add4fin = add4bin.join("");
+        var ipbin = add1fin + "." + add2fin + "." + add3fin + "." + add4fin;
+        //ip 2 bin selesai
+
+
+        //subnet mask
+        var mask = document.getElementById("mask").value;
+        if (isNaN (mask)){
+            alert(mask + " is Invalid mask");
+            maskfalse = 1
+        } else {
+            maskfalse = 0
+        }
+        var maskstr = "";
+
+        for (let h = 0; h < mask; h++) {
+          maskstr = maskstr += "1";
+        }
+
+        var maskmin = 32 - maskstr.length;
+
+        //host
+        var tothost = 2**maskmin
+        var usehost = tothost - 2
+        //host selesai
+
+        var maskspl = maskstr.split("");
+
+        if (maskstr.length < 32) {
+          for (let i = 0; i < maskmin; i++) {
+            maskspl.push("0");
+          } 
+        } else if (maskstr.length > 32) {
+            alert(mask + " is Invalid mask");
+            maskfalse = 1
+        } else {
+            maskfalse = 0
+        }
+
+        var maskjoin = maskspl.join("");
+        var maskslc1 = maskjoin.slice(0, 8);
+        var maskslc2 = maskjoin.slice(8, 16);
+        var maskslc3 = maskjoin.slice(16, 24);
+        var maskslc4 = maskjoin.slice(24, 32);
+        var maskint1 = parseInt(maskslc1, 2);
+        var maskint2 = parseInt(maskslc2, 2);
+        var maskint3 = parseInt(maskslc3, 2);
+        var maskint4 = parseInt(maskslc4, 2);
+        var maskfin = maskint1 + "." + maskint2 + "." + maskint3 + "." + maskint4;
+        var maskbin = maskslc1 + "." + maskslc2 + "." + maskslc3 + "." + maskslc4;
         
-        var add1bin = add1n.toString(2).split("")
-        var add2bin = add2n.toString(2).split("")
-        var add3bin = add3n.toString(2).split("")
-        var add4bin = add4n.toString(2).split("")
-        var oktet1 = 8 - add1bin.length
-        var oktet2 = 8 - add2bin.length
-        var oktet3 = 8 - add3bin.length
-        var oktet4 = 8 - add4bin.length
+        if (maskfalse === 1){
+            maskfin = "invalid"
+            maskbin = "invalid"
+            ipbin = "invalid"
+        }
+        //subnet seleasai
 
-        if (add1bin.length < 8){
-            for (var b = 0; b < oktet1; b++) {
-                add1bin.unshift("0")
-            }
-        }
-        if (add2bin.length < 8){
-            for (var c = 0; c < oktet2; c++) {
-                add2bin.unshift("0")
-            }
-        }
-        if (add3bin.length < 8){
-            for (var d = 0; d < oktet3; d++) {
-                add3bin.unshift("0")
-            }
-        }
-        if (add4bin.length < 8){
-            for (var f = 0; f < oktet4; f++) {
-                add4bin.unshift("0")
-            }
-        }
-        var add1fin = add1bin.join("")
-        var add2fin = add2bin.join("")
-        var add3fin = add3bin.join("")
-        var add4fin = add4bin.join("")
-        var ipbin = add1fin+"."+add2fin+"."+add3fin+"."+add4fin
-        document.getElementById("res").innerHTML = ipbin;
-        }
 
-        function reset() {
-	    document.getElementById("ip").value = "";
-	    document.getElementById("res").innerHTML = "";
-        }
+        document.getElementById("ipbin").innerHTML = ipbin;
+        document.getElementById("submask").innerHTML = maskfin;
+        document.getElementById("subbin").innerHTML = maskbin;
+        document.getElementById("th").innerHTML = tothost;
+        document.getElementById("uh").innerHTML = usehost;
+      }
 
-        
+      function reset() {
+        document.getElementById("ip").value = "";
+        document.getElementById("ipbin").innerHTML = "";
+        document.getElementById("submask").innerHTML = "";
+        document.getElementById("subbin").innerHTML = "";
+        document.getElementById("mask").value = "";
+        document.getElementById("th").innerHTML = "";
+        document.getElementById("uh").innerHTML = "";
+      }
     </script>
-</body>
+  </body>
 </html>

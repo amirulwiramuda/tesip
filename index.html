@@ -8,7 +8,7 @@
   </head>
   <body>
     <label>IP address :</label>
-    <input id="ip" type="text" placeholder="192.168.1.1" /> <br />
+    <input id="ip" type="text" placeholder="192.168.1.1"/><br />
     <br />
     <label>Mask/CIDR :</label>
     <input id="mask" type="text" placeholder="24" /> <br />
@@ -19,10 +19,15 @@
     <p id="submask"></p>
     <label>Subnet Bin :</label>
     <p id="subbin"></p>
+    <label>Network Address :</label>
+    <p id="netid"></p>
+    <label>Broadcast Address :</label>
+    <p id="bcid"></p>
     <label>Total Host :</label>
     <p id="th"></p>
     <label>Usable Host :</label>
     <p id="uh"></p>
+    
     <br />
     <button onclick="dec2bin()" id="con">Convert</button>
     <button onclick="reset()" id="set">Reset</button>
@@ -142,7 +147,8 @@
         var add2fin = add2bin.join("");
         var add3fin = add3bin.join("");
         var add4fin = add4bin.join("");
-        var ipbin = add1fin + "." + add2fin + "." + add3fin + "." + add4fin;
+        var ipbin1 = add1fin + add2fin + add3fin + add4fin
+        var ipbin = add1fin + "." + add2fin + "." + add3fin + "." + add4fin
         //ip 2 bin selesai
 
 
@@ -199,12 +205,44 @@
         }
         //subnet seleasai
 
+        //broadcast sama net id mulai
+        var ipsplit = ipbin1.slice(0, maskstr.length)
+        var broadsplit = ipbin1.slice(0, maskstr.length)
+        for (let k = 0; k < maskmin; k++) {
+             ipsplit += "0"
+        }
+        for (let l = 0; l < maskmin; l++) {
+            broadsplit +="1"
+        }
+        var broadjon1 = broadsplit.slice(0, 8);
+        var broadjon2 = broadsplit.slice(8, 16);
+        var broadjon3 = broadsplit.slice(16, 24);
+        var broadjon4 = broadsplit.slice(24, 32);
+        var broadadd1 = parseInt(broadjon1, 2);
+        var broadadd2 = parseInt(broadjon2, 2);
+        var broadadd3 = parseInt(broadjon3, 2);
+        var broadadd4 = parseInt(broadjon4, 2);
+        var broadadd = broadadd1+"."+broadadd2+"."+broadadd3+"."+broadadd4
+
+
+        var ipjon1 = ipsplit.slice(0, 8);
+        var ipjon2 = ipsplit.slice(8, 16);
+        var ipjon3 = ipsplit.slice(16, 24);
+        var ipjon4 = ipsplit.slice(24, 32);
+        var ipnet1 = parseInt(ipjon1, 2);
+        var ipnet2 = parseInt(ipjon2, 2);
+        var ipnet3 = parseInt(ipjon3, 2);
+        var ipnet4 = parseInt(ipjon4, 2);
+        ipnet = ipnet1+"."+ipnet2+"."+ipnet3+"."+ipnet4
+        //broadcast & net id Selesai
 
         document.getElementById("ipbin").innerHTML = ipbin;
         document.getElementById("submask").innerHTML = maskfin;
         document.getElementById("subbin").innerHTML = maskbin;
         document.getElementById("th").innerHTML = tothost;
         document.getElementById("uh").innerHTML = usehost;
+        document.getElementById("netid").innerHTML = ipnet;
+        document.getElementById("bcid").innerHTML = broadadd;
       }
 
       function reset() {
@@ -215,6 +253,8 @@
         document.getElementById("mask").value = "";
         document.getElementById("th").innerHTML = "";
         document.getElementById("uh").innerHTML = "";
+        document.getElementById("netid").innerHTML = "";
+        document.getElementById("bcid").innerHTML = "";
       }
     </script>
   </body>
